@@ -167,7 +167,7 @@ void convertString(dataPacket* data){
    data->speedX, data->speedY, data->speedZ
    );  
 
-sprintf(strGen, "BB#%.2fg#%.2fG#%.2fC#EE", random(2800,2850)/100.00, random(2800,2850)/100.00,data->current);
+sprintf(strGen, "BB#%.2fg#%.2fG#%.2fC#EE", data->temp1, data->temp2,data->current);
  sprintf(strNav, "BB#%.2fu#%.2fv#%.2fw#EE",
    data->navX, data->navY, data->navZ
   );
@@ -250,9 +250,9 @@ delay(2000);
 
   //ESC
   ESP32PWM::allocateTimer(0);
-	ESP32PWM::allocateTimer(1);
-	ESP32PWM::allocateTimer(2);
-	ESP32PWM::allocateTimer(3);
+  ESP32PWM::allocateTimer(1);
+  ESP32PWM::allocateTimer(2);
+  ESP32PWM::allocateTimer(3);
 
   escFR.setPeriodHertz(50);
   escFL.setPeriodHertz(50);
@@ -290,7 +290,7 @@ delay(2000);
 
 
 attachInterrupt(digitalPinToInterrupt(4), beginCounter1, FALLING);
-attachInterrupt(digitalPinToInterrupt(ENC), beginCounter2, RISING);
+attachInterrupt(digitalPinToInterrupt(ENC), beginCounter2, FALLING);
 
 timer1 = timerBegin(0, 1000, true); // Prescale Oranı : 1000
 timer2 = timerBegin(1, 1000, true); // Prescale : 1000
